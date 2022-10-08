@@ -1,0 +1,38 @@
+{"intents": [
+    {"tag": "botprofile",
+     "patterns": ["What are your interests", "What is your number", "What is your location", "Who is your father", "Good day", "Whats up","What is your age"],
+     "responses": ["I am interested in helping you medically!!", "You can contact the helpline at +91 9999 11111", "We are located at Puducherry","MbedTech healthcare team created me.","You can call me RoBot.","I'm RoBot!","I was created in August 2020."],
+     "context_set": ""
+    },
+    {"tag": "cough",
+     "patterns": ["My nose is choked", "yes i have cold", "I took the sudafed tablet","No, i am still not felling better after having sudafed tablet", "Can u book an appointment for me"],
+     "responses": ["Okay, this is a symptom of cold, do you have cold?", "You should take a sudafed tablet after your meal.", "Good, now take some rest and then let me know if you are feeling better after having sudafed tablet!","Ok, its not just a normal cold, you should consult a doctor.","Yes Sure!"],
+     "context_set": ""
+    },
+    {"tag": "cold",
+     "patterns": ["I have a cough.", "Ok, i will take the benadryl.", "I took the dose of benadryl.", "how old are you", "No, i am still not felling better after having benadryl.","Can u book an appointment for me."],
+     "responses": ["You should take a spoon full of benadryl after your meal.", "let me know if you are feeling better after having benadryl.","Good, now take some rest and then let me know if you are feeling better after having benadryl.","Ok, its not just a normal cough, you should consult a doctor.","Yes Sure!"],
+     "context_set": ""
+    },
+    {"tag": "chest",
+     "patterns": ["My chest is aching", "yes i have cough.", "Ok, i will take the benadryl."],
+     "responses": ["Okay, this is a symptom of cough , do you have cough?.", "You should take a spoon full of benadryl after your meal.", "let me know if you are feeling better after having benadryl."],
+     "context_set": ""
+    },
+    {"tag": "fever",
+     "patterns": ["I am not feeling well", "My body temperature has raised.", "Ok, i will take the crocin", "I took crocin but not feeling well?"],
+     "responses": ["Okay. can you tell me what's wrong? what are your symptoms?", "This is a symptom of fever, you should take a tablet of crocin after you have your meal!","let me know if you are feeling better after having crocin","Ok, its not just a normal fever, you should consult a doctor"],
+     "context_set": ""
+    },
+    {"tag": "headache",
+     "patterns": ["i have a headache", "i have a migrane headache", "i have a cluster headache","i have a tension headache"],
+     "responses": ["what kind of headache do you have : 1. Migrane headache - intense throbbing pain on just one side of the head. 2. Cluster headaches - severe and recurrent headaches 3. Tension Headache - Ocassional;!","symptom noted. Migraines tend to be recurrent, and each attack may last up to 3 days. would you like to talk to a doctor?","symptom noted. Attacks tend to occur in daily clusters that can persist for weeks or months. They typically take place at the same time of day, which can often be a couple of hours after falling asleep at night. would you like to talk to a doctor?","symptom noted. The cause of tension headaches is unclear, but stress, anxiety, and depression are common triggers. would you like to talk to a doctor?"],
+     "context_set": ""
+    },
+    {"tag": "doctor",
+     "patterns": ["is a doctor available ?", "hi can i see a doctor ?", "i want to talk to a doctor","can you book an apointment with a doctor?","Patient Name Date Time Doctor Hospital","thanks"],
+     "responses": ["sorry, all doctors are occupied at the moment. We will connect you to a doctor soon. Do you want to book an appointment?","all doctors are attending patients. we shall revert to your request soon. Do you want to book an appointment?","you shall be called once the doctor is available. Do you want to book an appointment?","yes please state time and doctor's name in the following format; 'Patient Name:  Date:  Doctor: Hospital:'","appointment details saved. you shall be contacted shortly.","happy to help!"],
+     "context_set": ""
+    }
+]
+}

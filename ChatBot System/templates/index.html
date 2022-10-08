@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+
+
+/*===========================
+     CHAT BOOT MESSENGER
+   ===========================*/
+#Smallchat .Messages, #Smallchat .Messages_list {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+.chat_close_icon {
+   cursor:pointer;
+    color: #fff;
+    font-size:16px;
+    position: absolute;
+    right: 12px;
+    z-index: 9;
+}
+.chat_on {
+    position: fixed;
+    z-index: 10;
+    width: 45px;
+    height: 45px;
+    right: 15px;
+    bottom:20px;
+    background-color: #8a57cf;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    padding: 9px;
+    box-shadow: 0 2px 4px 0 rgb(245, 239, 239),0 2px 10px 0 rgb(241, 238, 238)!important;
+    cursor: pointer;
+    display: block;
+}
+.chat_on_icon{
+    color:#fff;
+    font-size:25px;
+    text-align:center;
+}
+/*
+#Smallchat,#Smallchat * {
+ box-sizing:border-box; 
+ -webkit-font-smoothing:antialiased;
+ -moz-osx-font-smoothing:grayscale;
+ -webkit-tap-highlight-color:transparent
+}
+*/
+#Smallchat .Layout { 
+ pointer-events:auto;
+ box-sizing:content-box!important;
+ z-index:999999999;
+ position:fixed;
+ bottom:20px;
+ min-width:50px;
+ max-width:300px;
+ max-height:30px;
+ display:-webkit-box;
+ display:-webkit-flex;
+ display:-ms-flexbox;
+ display:flex;
+ -webkit-box-orient:vertical;
+ -webkit-box-direction:normal;
+ -webkit-flex-direction:column;
+ -ms-flex-direction:column;
+ flex-direction:column;
+ -webkit-box-pack:end;
+ -webkit-justify-content:flex-end;
+ -ms-flex-pack:end;
+ justify-content:flex-end;
+ border-radius:50px;
+ box-shadow:5px 0 20px 5px rgb(238, 236, 236);
+ -webkit-animation:appear .15s cubic-bezier(.25,.25,.5,1.1);
+ animation:appear .15s cubic-bezier(.25,.25,.5,1.1);
+ -webkit-animation-fill-mode:forwards;
+ animation-fill-mode:forwards;
+ opacity:0;
+ -webkit-transition:right .1s cubic-bezier(.25,.25,.5,1),bottom .1s cubic-bezier(.25,.25,.5,1),min-width .2s cubic-bezier(.25,.25,.5,1),max-width .2s cubic-bezier(.25,.25,.5,1),min-height .2s cubic-bezier(.25,.25,.5,1),max-height .2s cubic-bezier(.25,.25,.5,1),border-radius 50ms cubic-bezier(.25,.25,.5,1) .15s,background-color 50ms cubic-bezier(.25,.25,.5,1) .15s,color 50ms cubic-bezier(.25,.25,.5,1) .15s;
+ transition:right .1s cubic-bezier(.25,.25,.5,1),bottom .1s cubic-bezier(.25,.25,.5,1),min-width .2s cubic-bezier(.25,.25,.5,1),max-width .2s cubic-bezier(.25,.25,.5,1),min-height .2s cubic-bezier(.25,.25,.5,1),max-height .2s cubic-bezier(.25,.25,.5,1),border-radius 50ms cubic-bezier(.25,.25,.5,1) .15s,background-color 50ms cubic-bezier(.25,.25,.5,1) .15s,color 50ms cubic-bezier(.25,.25,.5,1) .15s
+     
+}
+
+#Smallchat .Layout-right {
+ right:20px
+}
+
+#Smallchat .Layout-open {
+ overflow:hidden;
+ min-width:300px;
+ max-width:300px;
+ height:500px;
+ max-height:500px;
+ border-radius:10px;
+ color:#fff;
+ -webkit-transition:right .1s cubic-bezier(.25,.25,.5,1),bottom .1s cubic-bezier(.25,.25,.5,1.1),min-width .2s cubic-bezier(.25,.25,.5,1.1),max-width .2s cubic-bezier(.25,.25,.5,1.1),max-height .2s cubic-bezier(.25,.25,.5,1.1),min-height .2s cubic-bezier(.25,.25,.5,1.1),border-radius 0ms cubic-bezier(.25,.25,.5,1.1),background-color 0ms cubic-bezier(.25,.25,.5,1.1),color 0ms cubic-bezier(.25,.25,.5,1.1);
+ transition:right .1s cubic-bezier(.25,.25,.5,1),bottom .1s cubic-bezier(.25,.25,.5,1.1),min-width .2s cubic-bezier(.25,.25,.5,1.1),max-width .2s cubic-bezier(.25,.25,.5,1.1),max-height .2s cubic-bezier(.25,.25,.5,1.1),min-height .2s cubic-bezier(.25,.25,.5,1.1),border-radius 0ms cubic-bezier(.25,.25,.5,1.1),background-color 0ms cubic-bezier(.25,.25,.5,1.1),color 0ms cubic-bezier(.25,.25,.5,1.1);
+}
+
+#Smallchat .Layout-expand {
+ height:500px;
+ min-height:500px;
+      display:none;
+}
+#Smallchat .Layout-mobile {
+ bottom:10px
+}
+#Smallchat .Layout-mobile.Layout-open {
+ width:calc(100% - 20px);
+ min-width:calc(100% - 20px)
+}
+#Smallchat .Layout-mobile.Layout-expand {
+ bottom:0;
+ height:100%;
+ min-height:100%;
+ width:100%;
+ min-width:100%;
+ border-radius:0!important
+}
+@-webkit-keyframes appear {
+ 0% {
+  opacity:0;
+  -webkit-transform:scale(0);
+  transform:scale(0)
+ }
+ to {
+  opacity:1;
+  -webkit-transform:scale(1);
+  transform:scale(1)
+ }
+}
+@keyframes appear {
+ 0% {
+  opacity:0;
+  -webkit-transform:scale(0);
+  transform:scale(0)
+ }
+ to {
+  opacity:1;
+  -webkit-transform:scale(1);
+  transform:scale(1)
+ }
+}
+#Smallchat .Messenger_messenger {
+ position:relative;
+ height:100%;
+ width:100%;
+ min-width:300px;
+ -webkit-box-orient:vertical;
+ -webkit-box-direction:normal;
+ -webkit-flex-direction:column;
+ -ms-flex-direction:column;
+ flex-direction:column
+}
+#Smallchat .Messenger_header,#Smallchat .Messenger_messenger {
+ display:-webkit-box;
+ display:-webkit-flex;
+ display:-ms-flexbox;
+ display:flex
+}
+#Smallchat .Messenger_header {
+ -webkit-box-align:center;
+ -webkit-align-items:center;
+ -ms-flex-align:center;
+ align-items:center;
+ padding-left:10px;
+ padding-right:40px;
+ height:40px;
+ -webkit-flex-shrink:0;
+ -ms-flex-negative:0;
+ flex-shrink:0
+}
+
+
+#Smallchat .Messenger_header h4 {
+ opacity:0;
+ font-size:16px;
+ -webkit-animation:slidein .15s .3s;
+ animation:slidein .15s .3s;
+ -webkit-animation-fill-mode:forwards;
+ animation-fill-mode:forwards
+}
+
+#Smallchat .Messenger_prompt {
+ margin:0;
+ font-size:16px;
+ line-height:18px;
+ font-weight:400;
+ overflow:hidden;
+ white-space:nowrap;
+ text-overflow:ellipsis
+}
+
+@-webkit-keyframes slidein {
+ 0% {
+  opacity:0;
+  -webkit-transform:translateX(10px);
+  transform:translateX(10px)
+ }
+ to {
+  opacity:1;
+  -webkit-transform:translateX(0);
+  transform:translateX(0)
+ }
+}
+@keyframes slidein {
+ 0% {
+  opacity:0;
+  -webkit-transform:translateX(10px);
+  transform:translateX(10px)
+ }
+ to {
+  opacity:1;
+  -webkit-transform:translateX(0);
+  transform:translateX(0)
+ }
+}
+#Smallchat .Messenger_content {
+    height: 450px;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+}
+#Smallchat .Messages {
+    position: relative;
+    -webkit-flex-shrink: 1;
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #fff;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+
+
+
+#Smallchat .Input {
+    position: relative;
+    width: 100%;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    padding-top: 17px;
+    padding-bottom: 15px;
+    color: #96aab4;
+    background-color: #fff;
+    border-top: 1px solid #e6ebea;
+}
+#Smallchat .Input-blank .Input_field {
+    max-height: 20px;
+}
+#Smallchat .Input_field {
+    width: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    padding: 0;
+        padding-right: 0px;
+        padding-left: 0px;
+    padding-left: 20px;
+    padding-right: 75px;
+    background-color: transparent;
+    font-size: 16px;
+    line-height: 20px;
+    min-height: 20px !important;
+}
+#Smallchat .Input_button-emoji {
+    right: 45px;
+}
+#Smallchat .Input_button {
+    position: absolute;
+    bottom: 15px;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+#Smallchat .Input_button-send {
+    right: 15px;
+}
+#Smallchat .Input-emoji .Input_button-emoji .Icon, #Smallchat .Input_button:hover .Icon {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+#Smallchat .Input-emoji .Input_button-emoji .Icon path, #Smallchat .Input_button:hover .Icon path {
+    fill: #2c2c46;
+}
+body {font-family: "Times New Roman", Georgia, Serif;}
+</style>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
+  <!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <a href="/" class="w3-bar-item w3-button">EDucational Chat-bot</a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="/index" class="w3-bar-item w3-button">Chat-Bot</a>
+      <a href="#about" class="w3-bar-item w3-button">About</a>
+      
+    </div>
+  </div>
+  
+  <div class="w3-row w3-padding-64" id="about">
+    
+
+    <div class="w3-col m6 w3-padding-large">
+      <h1 class="w3-center">Educational Chat-bot</h1><br>
+      <h5 class="w3-center">Created on 2021</h5>
+      <p class="w3-large">A chatbot is a software application used to conduct an on-line chat conversation via text , in lieu of providing direct contact with a live human agent. </p>
+      <p class="w3-large w3-text-grey w3-hide-medium">AI chatbots allow students to learn through online messages just like a regular chat conversation. Moreover, these chatbots help teachers assess students' levels of understanding by recording their answers and responses. Just like a classroom, chatbots provide the learning material, tests, and quizzes to students.</p>
+    </div>
+    <div class="w3-col m6 w3-padding-large w3-hide-small">
+      <img src="../static/12.png" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
+     </div>
+  </div>
+    <div class="container">
+	<div class="row">
+	 <div id="Smallchat">
+    <div class="Layout Layout-open Layout-expand Layout-right" style="background-color: #3F51B5;color: rgb(255, 255, 255);opacity: 15;border-radius: 10px;size:100px;">
+      <div class="Messenger_messenger">
+        <div class="Messenger_header" style="background-color: rgb(22, 46, 98); color: rgb(255, 255, 255);">
+          <h4 class="Messenger_prompt">Chatbot</h4> <span class="chat_close_icon"><i class="fa fa-window-close" aria-hidden="true"></i></span> </div>
+        <div class="Messenger_content">
+          <div class="Messages">
+            <div class="Messages_list"></div>
+          </div>
+          <div class="msger">
+            <header class="msger-header">
+              <div class="msger-header-title">
+                <i class="fas fa-bug"></i>  <i class="fas fa-bug"></i>
+              </div>
+            </header>
+            <main class="msger-chat">
+              <div class="msg left-msg">
+                <div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"></div>
+                <div class="msg-bubble">
+                  <div class="msg-info">
+                    <div style="color: blueviolet; font-size: x-large;" class="msg-info-name">Edubot</div>
+                    
+                  </div>
+        
+                  <div style="color: rgb(238, 231, 231)" class="msg-text">
+                    Hi, welcome to EduBot! 😄 Please eneter your details before we continue.
+                  </div>
+                </div>
+              </div>
+        
+            </main>
+              <form class="msger-inputarea">
+              <input type="text" class="msger-input" id="textInput" placeholder="Enter your message...">
+              <button type="submit" class="msger-send-btn">Send</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--===============CHAT ON BUTTON STRART===============-->
+    <div class="chat_on"> <span class="chat_on_icon"><i class="fa fa-comments" aria-hidden="true"></i></span> </div>
+    <!--===============CHAT ON BUTTON END===============-->
+  </div>
+	</div>
+</div>
+<script>
+    $(document).ready(function(){
+    $(".chat_on").click(function(){
+        $(".Layout").toggle();
+        $(".chat_on").hide(300);
+    });
+    
+       $(".chat_close_icon").click(function(){
+        $(".Layout").hide();
+           $(".chat_on").show(300);
+    });
+    
+});
+</script>
+<script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+  <script>
+
+    const msgerForm = get(".msger-inputarea");
+    const msgerInput = get(".msger-input");
+    const msgerChat = get(".msger-chat");
+    
+    // Icons made by Freepik from www.flaticon.com
+    const BOT_IMG = "https://cdn-icons-png.flaticon.com/512/4233/4233830.png"
+    const PERSON_IMG = "https://www.pinclipart.com/picdir/middle/95-958614_man-icon-person-logo-png-clipart.png";
+    const BOT_NAME = " EduBot";
+    const PERSON_NAME = "User";
+
+    msgerForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const msgText = msgerInput.value;
+      if (!msgText) return;
+
+      appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+      msgerInput.value = "";
+      botResponse(msgText);
+    });
+
+    function appendMessage(name, img, side, text) {
+      //   Simple solution for small apps
+      const msgHTML = `
+<div style="color: white" class="msg ${side}-msg">
+  <div class="msg-img" style="background-image: url(${img})"></div>
+
+  <div style="color: whitek" class="msg-bubble">
+    <div style="color: white" class="msg-info">
+      <div style="color: white" class="msg-info-name">${name}</div>
+      <div style="color: white" class="msg-info-time">${formatDate(new Date())}</div>
+    </div>
+
+    <div style="color: white" class="msg-text">${text}</div>
+  </div>
+</div>
+`;
+
+      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      msgerChat.scrollTop += 500;
+    }
+
+    function botResponse(rawText) {
+
+      // Bot Response
+      $.get("/get", { msg: rawText }).done(function (data) {
+        console.log(rawText);
+        console.log(data);
+        const msgText = data;
+        appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+
+      });
+
+    }
+
+
+    // Utils
+    function get(selector, root = document) {
+      return root.querySelector(selector);
+    }
+
+    function formatDate(date) {
+      const h = "0" + date.getHours();
+      const m = "0" + date.getMinutes();
+
+      return `${h.slice(-2)}:${m.slice(-2)}`;
+    }
+
+
+
+  </script>
+  <!-- Footer -->
+
+
+</html>
